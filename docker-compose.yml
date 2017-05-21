@@ -1,0 +1,37 @@
+version: '2'
+services:
+    web:
+        build:
+            context: ./web
+        volumes:
+            - ./www:/var/www
+        ports:
+            - "8000:80"
+        links:
+            - app
+    app:
+        build:
+            context: ./app
+        volumes:
+            - ./www:/var/www
+        links:
+            - mysql
+            - redis
+    mysql:
+        restart: always
+        image: mysql:latest
+        volumes:
+            - ./mysql:/var/lib/mysql
+        environment:
+            - "MYSQL_ROOT_PASSWORD=secret"
+            - "MYSQL_DATABASE=laraveltest"
+        ports:
+            - "3306:3306"
+    redis:
+        restart: always
+        image: redis:latest
+        volumes:
+            - ./redis:/data
+        ports:
+            - "6379:6379"
+        command: redis-server --appendonly yes
