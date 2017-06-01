@@ -1,0 +1,6 @@
+[submodule "www/VueStudy"]
+	path = www/VueStudy
+	url = http://github.com/taross/VueStudy.git
+[submodule "www/laravel"]
+	path = www/laravel
+	url = https://github.com/taross/VueStudy
